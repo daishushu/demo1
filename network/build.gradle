@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.dokka-android'
+//android配置
+def config = rootProject.ext.android
+//相关库依赖
+def librarys = rootProject.ext.dependencies
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation(librarys.espresso, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testImplementation librarys.junit
+    implementation librarys.kotlin
+    implementation librarys.supportAppcompat
+    implementation librarys.support_annotations
+    implementation librarys.kotlin
+    implementation librarys.anko
+    implementation librarys.retrofit
+    implementation librarys.okhttp
+    implementation librarys.okio
+    implementation librarys.gson
+}
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = "javadoc"
+    outputDirectory = "$buildDir/dokkaJavadoc"
+    sourceDirs = files('src/main/com/dwz')
+}
