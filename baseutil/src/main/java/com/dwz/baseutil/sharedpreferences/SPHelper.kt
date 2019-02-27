@@ -117,7 +117,7 @@ fun swap(array: IntArray, i: Int, j: Int) {
     array[j] = temp
 }
 
-fun quickSort_1(data: IntArray?, start: Int, end: Int) {
+/*fun quickSort_1(data: IntArray?, start: Int, end: Int) {
     if (data == null || start < 0 || end > data.size - 1) {
         throw IllegalArgumentException("Invalid Parameters")
     }
@@ -129,7 +129,7 @@ fun quickSort_1(data: IntArray?, start: Int, end: Int) {
     if (index < end) {
         quickSort_1(data, index + 1, end)
     }
-}
+}*/
 
 private fun partition(data: IntArray, start: Int, end: Int): Int {
     var index = start + (Math.random() * (end - start + 1)).toInt()
